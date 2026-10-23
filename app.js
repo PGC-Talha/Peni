@@ -55,10 +55,10 @@ function mapPage(id){
 function lineupPage(mid,lid){
   const m=mapById(mid),l=LINEUPS.find(x=>x.id===lid&&x.map===mid);if(!m||!l)return nf();
   const ims=l.images||[];
-  return back('#/lineups/'+mid)+`<div class="crumb">${esc(m.name)}${l.side?' / <b>'+esc(l.side)+'</b>':''}${l.point?' / <b>'+esc(l.point)+'</b>':''}</div><h1>${esc(l.title)}</h1>
-  ${l.author?`<p class="dim">By <a href="${esc(l.authorUrl)}" target="_blank" rel="noopener">${esc(l.author)}</a></p>`:''}
-  ${l.desc?`<div class="desc">${esc(l.desc)}</div>`:''}
-  ${ims.length?`<div class="viewer">${img(ims[0],'id="big"')}</div>`+(ims.length>1?`<div class="thumbs">${ims.map((f,i)=>`<button data-f="${esc(f)}" class="${i?'':'on'}">${img(f)}</button>`).join('')}</div>`:''):'<div class="slot">No images yet.</div>'}`;
+  return `<section class="lineup-detail">${back('#/lineups/'+mid)}
+  <div class="lineup-heading"><div class="crumb">${esc(m.name)}${l.side?' / <b>'+esc(l.side)+'</b>':''}${l.point?' / <b>'+esc(l.point)+'</b>':''}</div><h1>${esc(l.title)}</h1>
+  ${l.author?`<p class="lineup-credit">By <a href="${esc(l.authorUrl)}" target="_blank" rel="noopener">${esc(l.author)}</a></p>`:''}${l.desc?`<div class="desc">${esc(l.desc)}</div>`:''}</div>
+  ${ims.length?`<div class="lineup-gallery ${ims.length>1?'has-thumbs':'single-image'}"><div class="viewer">${img(ims[0],'id="big"')}</div>${ims.length>1?`<div class="thumbs">${ims.map((f,i)=>`<button data-f="${esc(f)}" aria-label="Show screenshot ${i+1}" class="${i?'':'on'}">${img(f)}</button>`).join('')}</div>`:''}</div>`:'<div class="slot">No images yet.</div>'}</section>`;
 }
 function mapsPage(f){
   const list=MAPS.filter(m=>!f||m.mode===f);
