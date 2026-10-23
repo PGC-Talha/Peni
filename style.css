@@ -75,6 +75,7 @@ h3{color:var(--head)}p{max-width:60ch;font-size:.84rem;line-height:1.65}
 a.row:hover{border-color:var(--head);background:#fff;box-shadow:4px 4px 0 #a5223015;transform:translateY(-2px)}
 .row small{color:var(--dim)}.row .go{color:var(--head)}.row.empty{background:#ffffffaa}
 .cols{gap:18px}.slot{border-color:var(--line);color:var(--dim)}.back{font-size:.8rem}.crumb{font-size:.82rem;color:var(--dim)}
+.guide-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:24px 0 38px}.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px}.guide-card-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}.guide-card-head b{color:var(--head)}.guide-update{padding-top:10px;margin-top:10px;border-top:1px solid #e4c1c4}.guide-synergy{margin:16px 0}.system-overview{margin:34px 0}.system-stat b{display:block;color:var(--head);font-family:Arial,sans-serif;font-size:1.6rem;letter-spacing:-.04em}.system-stat p{margin:8px 0 0}.system-overview h2{margin-top:8px}
 .desc{color:var(--head);font-size:1rem}.viewer img{border:1px solid var(--line)}
 .thumbs button{border-color:var(--line);background:#fff;transition:opacity .2s ease,transform .2s ease,border-color .2s ease}.thumbs button:hover{transform:translateY(-2px)}
 .badge{border-color:var(--line);color:var(--dim)}

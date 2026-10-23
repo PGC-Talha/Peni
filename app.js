@@ -2,7 +2,7 @@
 DATA.maps=MAPS;
 const $=s=>document.querySelector(s), app=$('#app');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const PAGES=[['','Startup'],['lineups','Lineups'],['maps','Maps'],['abilities','Abilities'],['patches','Patch Log'],['teamcomps','Team Comps']];
+const PAGES=[['','Startup'],['lineups','Lineups'],['guides','Guides'],['maps','Map Database'],['system','System Info']];
 const MODES=['Convergence','Domination','Convoy'];
 const img=(f,c)=>`<img ${c||''} loading="lazy" src="images/${esc(f)}" alt="">`;
 $('#m-user').textContent=DATA.meta.loggedInAs;$('#m-upd').textContent=DATA.meta.lastUpdate;
@@ -54,20 +54,36 @@ function mapsPage(f){
   <div class="filters">${['',...MODES].map(x=>`<button data-f="${x}" class="${x===(f||'')?'on':''}">${x||'All'}</button>`).join('')}</div>
   <div class="grid">${list.map(m=>`<div class="card"><span class="badge b-${m.mode}">${m.mode}</span>${m.isNew?'<span class="badge ok">New</span>':''}<h3 style="margin:10px 0 2px;color:var(--head)">${esc(m.name)}</h3><div class="dim" style="font-size:.9rem">${esc(m.location)} · added ${esc(m.added)}</div><p style="margin-top:12px">${esc(m.note)}</p>${m.peni?`<b style="color:var(--teal)">Peni: ${esc(m.peni)}</b>`:''}</div>`).join('')}</div>`;
 }
-function abilities(){return `<span class="tag">//operator kit</span><h1>Abilities</h1>`+DATA.abilities.map(a=>`<div class="card"><span class="key">${esc(a.key)}</span><b style="color:var(--head)">${esc(a.name)}</b>${a.changed?` <span class="badge b-${a.changeType||''}">${a.changeType==='buff'?'Buffed':a.changeType==='nerf'?'Nerfed':'Updated'}</span>`:''}<p style="margin-top:10px">${esc(a.desc)}</p>${a.changed?`<p class="dim">${esc(a.changed)}</p>`:''}</div>`).join('')}
-function patches(){return `<span class="tag">//system changelog</span><h1>Patch Log</h1>`+DATA.patches.map(p=>`<div class="pn"><div><div class="v">${esc(p.version)}</div><div class="dim">${esc(p.date)}</div></div><div>${(p.tags||[]).map(t=>`<span class="badge b-${t}">${esc(t)}</span>`).join('')}<p style="margin-top:8px"><b>${esc(p.summary)}</b></p><p class="dim">${esc(p.detail||'')}</p></div></div>`).join('')}
-function comps(){return `<span class="tag">//alliance configurations</span><h1>Team Comps</h1><div class="grid">`+DATA.teamComps.map(c=>`<div class="card"><b style="color:var(--head)">${esc(c.name)}</b><div class="dim">⬡ ${c.partners.map(esc).join(' + ')}</div><span class="badge" style="margin-top:8px">${esc(c.type)}</span><p style="margin-top:10px">${esc(c.synergy)}</p><ul class="tips">${c.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')+`</div>`}
+function patchRows(){return DATA.patches.map(p=>`<div class="pn"><div><div class="v">${esc(p.version)}</div><div class="dim">${esc(p.date)}</div></div><div>${(p.tags||[]).map(t=>`<span class="badge b-${t}">${esc(t)}</span>`).join('')}<p style="margin-top:8px"><b>${esc(p.summary)}</b></p><p class="dim">${esc(p.detail||'')}</p></div></div>`).join('')}
+function guides(){
+  return `<span class="tag">//operator training library · season ${esc(DATA.meta.season)}</span><h1>Operational Guides & Training</h1>
+  <p>Current Peni Parker ability notes, team-up guidance, and field resources for ${esc(DATA.meta.seasonName)}.</p>
+  <div class="guide-links"><a class="row" href="#/lineups"><span>Field lineups<small>Browse ${LINEUPS.length} community setup screenshots</small></span><span class="go">open →</span></a><a class="row" href="#/maps"><span>Map database<small>Map-by-map notes for the current pool</small></span><span class="go">open →</span></a></div>
+  <section id="guide-abilities"><span class="tag">//operator kit</span><h2>Abilities & Tactics</h2><div class="guide-grid">${DATA.abilities.map(a=>`<article class="card guide-card"><div class="guide-card-head"><span class="key">${esc(a.key)}</span><b>${esc(a.name)}</b>${a.changed?` <span class="badge b-${a.changeType||''}">${a.changeType==='buff'?'Buffed':a.changeType==='nerf'?'Nerfed':'Updated'}</span>`:''}</div><p>${esc(a.desc)}</p>${a.changed?`<p class="dim guide-update">${esc(a.changed)}</p>`:''}</article>`).join('')}</div></section>
+  <section id="guide-teamups"><span class="tag">//squad coordination</span><h2>Team-Ups & Matchups</h2><div class="grid">${DATA.teamComps.map(c=>`<article class="card"><span class="tag">${esc(c.type)}</span><h3>${esc(c.name)}</h3><div class="dim">⬡ ${c.partners.map(esc).join(' + ')}</div><p class="guide-synergy">${esc(c.synergy)}</p><ul class="tips">${c.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></article>`).join('')}</div></section>
+  <section id="guide-contribute"><span class="tag">//community intel</span><h2>Contribute a resource</h2><p>Share a lineup screenshot with the community or use the editor to submit a new map, lineup, or tactical note.</p><div class="guide-links"><a class="row" href="add.html"><span>Prepare a lineup<small>Build a lineup entry from your screenshots</small></span><span class="go">open tool →</span></a><a class="row" href="admin.html"><span>Open site editor<small>Add or manage entries with repository access</small></span><span class="go">open editor →</span></a></div></section>`;
+}
+function systemInfo(){
+  const h=DATA.hero;
+  return `<span class="tag">//sys.msg</span><h1>System Admin Details</h1><p>This archive tracks current Peni Parker resources and balance notes. Content reflects Season ${esc(DATA.meta.season)} and was last updated ${esc(DATA.meta.lastUpdate)}.</p>
+  <section class="system-overview"><span class="tag">//live database</span><h2>System Status</h2><div class="grid"><div class="card system-stat"><span class="tag">operator</span><b>${esc(h.name)}</b><p>${esc(h.role)} · ${esc(h.health)} HP · ${esc(h.tier)}-Tier</p></div><div class="card system-stat"><span class="tag">lineup archive</span><b>${LINEUPS.length}</b><p>Community lineup entries across ${MAPS.length} maps.</p></div><div class="card system-stat"><span class="tag">current build</span><b>Season ${esc(DATA.meta.season)}</b><p>${esc(DATA.meta.seasonName)} · updated ${esc(DATA.meta.lastUpdate)}</p></div></div></section>
+  <section><span class="tag">//maintainer console</span><h2>Contribute & maintain</h2><p>Use the lineup builder for manual submissions or the admin editor to add and manage repository data. Changes are published through the site repository.</p><div class="guide-links"><a class="row" href="add.html"><span>Prepare a lineup<small>Generate a new entry for the archive</small></span><span class="go">open tool →</span></a><a class="row" href="admin.html"><span>Open site editor<small>Manage maps, lineups, and screenshots</small></span><span class="go">open editor →</span></a></div></section>
+  <section id="system-patches"><span class="tag">//system changelog</span><h2>Patch Log</h2>${patchRows()}</section>`;
+}
 const nf=()=>`<h1>Not found</h1><p><a href="#/lineups">← Back to lineups</a></p>`;
 let mapFilter='';
 function route(){
   const [a,b,c]=location.hash.replace(/^#\/?/,'').split('/').map(decodeURIComponent);
   const page=a||'';let h;
   if(page==='lineups')h=c?lineupPage(b,c):b?mapPage(b):lineupsIndex();
-  else if(page==='maps')h=mapsPage(mapFilter);else if(page==='abilities')h=abilities();
-  else if(page==='patches')h=patches();else if(page==='teamcomps')h=comps();else if(page==='')h=startup();else h=nf();
+  else if(page==='maps')h=mapsPage(mapFilter);else if(page==='guides'||page==='abilities'||page==='teamcomps')h=guides();
+  else if(page==='system'||page==='patches')h=systemInfo();else if(page==='')h=startup();else h=nf();
   app.innerHTML=h;window.scrollTo(0,0);
-  const cur=PAGES.find(p=>p[0]===page)||PAGES[0];$('#dir-cur').textContent=cur[1];
-  document.querySelectorAll('#dir-menu a').forEach(x=>x.classList.toggle('on',x.dataset.p===page));
+  const navPage=page==='abilities'||page==='teamcomps'?'guides':page==='patches'?'system':page;
+  const cur=PAGES.find(p=>p[0]===navPage)||PAGES[0];$('#dir-cur').textContent=cur[1];
+  document.querySelectorAll('#dir-menu a').forEach(x=>x.classList.toggle('on',x.dataset.p===navPage));
+  const aliasTarget=page==='abilities'?'#guide-abilities':page==='teamcomps'?'#guide-teamups':page==='patches'?'#system-patches':'';
+  if(aliasTarget)requestAnimationFrame(()=>document.querySelector(aliasTarget)?.scrollIntoView({behavior:'smooth'}));
 }
 app.addEventListener('click',e=>{
   const t=e.target.closest('.thumbs button');if(t){$('#big').src=t.querySelector('img').src;document.querySelectorAll('.thumbs button').forEach(x=>x.classList.toggle('on',x===t));}
