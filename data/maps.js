@@ -1,0 +1,22 @@
+// MAPS: one entry per map. "id" is what lineups.js refers to. Edit freely.
+// mode: Convergence | Convoy | Domination.  peni: "Strong" | "Neutral" | "Tough" | null
+const MAPS = [
+  {"id": "hall-of-djalia", "name": "Hall of Djalia", "location": "Intergalactic Empire of Wakanda", "mode": "Convergence", "added": "Dec 6, 2024 (Launch)", "peni": "Strong", "note": "Mystical interior layout with manageable sightlines. Build your nest on the objective early.", "isNew": false},
+  {"id": "symbiotic-surface", "name": "Symbiotic Surface", "location": "Klyntar", "mode": "Convergence", "added": "Dec 6, 2024 (Launch)", "peni": "Strong", "note": "Organic terrain has natural chokepoints that pair well with Arachno-Mines. Watch for Venom dive.", "isNew": false},
+  {"id": "shin-shibuya", "name": "Shin-Shibuya", "location": "Tokyo 2099", "mode": "Convergence", "added": "Launch", "peni": "Neutral", "note": "Dense urban layout breaks web lines. Focus on small corridor chokepoints near final point.", "isNew": false},
+  {"id": "central-park", "name": "Central Park", "location": "Empire of Eternal Night", "mode": "Convergence", "added": "—", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "heart-of-heaven", "name": "Heart of Heaven", "location": "Hydra Charteris Base", "mode": "Convergence", "added": "—", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "lower-manhattan", "name": "Lower Manhattan", "location": "Lower Manhattan", "mode": "Convergence", "added": "Apr 2, 2026", "peni": "Neutral", "note": "Open street sections can be hard to web-lock. Focus on the indoor final objective area.", "isNew": false},
+  {"id": "yggdrasil-path", "name": "Yggdrasil Path", "location": "Yggsgard", "mode": "Convoy", "added": "Launch", "peni": "Strong", "note": "Long sightlines favor web zone setup. Lock down the tree root checkpoints.", "isNew": false},
+  {"id": "spider-islands", "name": "Spider-Islands", "location": "Tokyo 2099", "mode": "Convoy", "added": "Launch", "peni": "Strong", "note": "Island chokepoints are narrow. Full web saturation here makes the point nearly unassailable.", "isNew": false},
+  {"id": "midtown", "name": "Midtown", "location": "Empire of Eternal Night", "mode": "Convoy", "added": "S0", "peni": "Neutral", "note": "Open mid-sections allow dive heroes to threaten nests. Prioritize wall placement.", "isNew": false},
+  {"id": "arakko", "name": "Arakko", "location": "Hellfire Gala", "mode": "Convoy", "added": "May 30, 2025", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "museum-of-contemplation", "name": "Museum of Contemplation", "location": "Collector's Museum", "mode": "Convoy", "added": "Jan 29, 2026", "peni": "Strong", "note": "Gallery-style corridors with tight exhibit rooms. Mines in exhibit alcoves are nearly invisible.", "isNew": false},
+  {"id": "thebes", "name": "Thebes", "location": "Egypt", "mode": "Convoy", "added": "Jul 23, 2026", "peni": "Neutral", "note": "Outdoor desert design with wide angles. Compensate by placing webs aggressively at flanks.", "isNew": false},
+  {"id": "royal-palace", "name": "Royal Palace", "location": "Yggsgard", "mode": "Domination", "added": "Launch", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "birnin-tchalla", "name": "Birnin T'Challa", "location": "Intergalactic Empire of Wakanda", "mode": "Domination", "added": "Dec 6, 2024 (Launch)", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "hells-heaven", "name": "Hell's Heaven", "location": "Hydra Charteris Base", "mode": "Domination", "added": "Launch", "peni": "Strong", "note": "Multi-level layout with tight passages. Webs placed on upper ledges are extremely hard to clear.", "isNew": false},
+  {"id": "krakoa", "name": "Krakoa", "location": "Hellfire Gala", "mode": "Domination", "added": "Apr 11, 2025", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "celestial-husk", "name": "Celestial Husk", "location": "Klyntar", "mode": "Domination", "added": "Jul 11, 2025", "peni": null, "note": "No notes yet.", "isNew": false},
+  {"id": "god-quarry", "name": "God Quarry", "location": "Omnipotence City", "mode": "Domination", "added": "Sep 24, 2026", "peni": "Strong", "note": "3 sections: House of Ideas (CQC), Halls of All-Knowing (vertical), Confessional Eternity (aerial). Multiple flanks reward aggressive web placement. One of the stronger Peni maps.", "isNew": true}
+];
