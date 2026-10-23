@@ -1,10 +1,5 @@
 # SP//DER Defense Corp. (Season 10.5)
 
-Static site: no build step. Open `index.html`, or push the folder to Netlify / GitHub Pages as-is.
-
-## One-time: copy the lineup images locally
-    python download_images.py
-This saves all 72 lineup images into `images/`. The site no longer loads anything from the original site, so run this before you deploy.
 
 ## Add a lineup
 1. Drop your screenshots into `images/`.
