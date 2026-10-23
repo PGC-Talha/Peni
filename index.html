@@ -2,15 +2,17 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SP//DER DEFENSE CORP.</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('spider-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=a914e9f">
+<link rel="stylesheet" href="style.css?v=darkmode-1">
 </head><body>
 <header id="top">
   <a class="logo" href="#/">
     <svg viewBox="0 0 36 36" width="38" height="38" fill="none"><polygon points="18,2 33,10.5 33,25.5 18,34 3,25.5 3,10.5" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="1.4"/><path d="M18 2v5M18 29v5M3 10.5l5 2M33 10.5l-5 2M3 25.5l5-2M33 25.5l-5-2" stroke="currentColor"/></svg>
     <span>SP//DER©<small>DEFENSE CORP.</small></span>
   </a>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false"><span aria-hidden="true">◐</span> Dark mode</button>
   <div class="dir">
     <button id="dir-btn" aria-expanded="false"><span class="dim">directory/</span> <b id="dir-cur">Startup</b> ▾</button>
     <nav id="dir-menu" hidden></nav>
@@ -20,5 +22,5 @@
 </header>
 <main id="app"></main>
 <footer><span class="ok">system online</span><span id="loc" class="dim"></span><span class="dim">SP//DER© DEFENSE CORP.</span><nav class="foot-nav" aria-label="Site navigation"><a href="#/">Startup</a><a href="#/lineups">Lineups</a><a href="#/guides">Guides</a><a href="#/maps">Map database</a><a href="#/system">System info</a></nav></footer>
-<script src="data/site.js"></script><script src="data/maps.js"></script><script src="data/lineups.js"></script><script src="app.js?v=a914e9f"></script>
+<script src="data/site.js"></script><script src="data/maps.js"></script><script src="data/lineups.js"></script><script src="app.js?v=darkmode-1"></script>
 </body></html>

@@ -2,6 +2,18 @@
 DATA.maps=MAPS;
 const $=s=>document.querySelector(s), app=$('#app');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const themeToggle=$('#theme-toggle');
+function setTheme(theme,animate){
+  const next=theme==='dark'?'dark':'light',root=document.documentElement;
+  if(animate){root.classList.add('theme-transition');requestAnimationFrame(()=>setTimeout(()=>root.classList.remove('theme-transition'),420))}
+  root.dataset.theme=next;
+  try{localStorage.setItem('spider-theme',next)}catch(e){}
+  const dark=next==='dark';themeToggle.setAttribute('aria-pressed',String(dark));
+  themeToggle.innerHTML=`<span aria-hidden="true">${dark?'☼':'◐'}</span> ${dark?'Light mode':'Dark mode'}`;
+  themeToggle.title=`Switch to ${dark?'light':'dark'} mode`;
+}
+setTheme(document.documentElement.dataset.theme||'light',false);
+themeToggle.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true));
 const PAGES=[['','Startup'],['lineups','Lineups'],['guides','Guides'],['maps','Map Database'],['system','System Info']];
 const MODES=['Convergence','Domination','Convoy'];
 const img=(f,c)=>`<img ${c||''} loading="lazy" src="images/${esc(f)}" alt="">`;
