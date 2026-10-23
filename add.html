@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Add a lineup</title>
+<link rel="stylesheet" href="style.css"><style>label{display:block;margin:16px 0 6px;color:var(--head)}input,select,textarea{width:100%;background:var(--card);color:var(--t);border:1px solid var(--line);padding:10px 12px;font:inherit}pre{background:var(--panel);border:1px solid var(--line);padding:16px;overflow:auto;white-space:pre-wrap;margin:18px 0}button.go{background:var(--teal);color:#001;border:0;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer;margin-right:10px}</style></head><body>
+<main><span class="tag">//tools</span><h1>Add a lineup</h1>
+<p>1) Put your screenshots in the <b>images/</b> folder. 2) Fill this in. 3) Paste the result at the bottom of <b>data/lineups.js</b>, before the final <code>];</code> (keep the comma after the previous entry).</p>
+<label>Map</label><select id="map"></select>
+<label>Side (leave empty for maps without Attack/Defense)</label><select id="side"><option value="">none</option><option>Attack</option><option>Defense</option></select>
+<label>Title</label><input id="title" placeholder="Spawn door to point">
+<label>Point</label><input id="point" placeholder="Point 1">
+<label>Description</label><textarea id="desc" rows="2" placeholder="From spawn, landing on point"></textarea>
+<label>Author name</label><input id="author" value="me"><label>Author link (optional)</label><input id="url">
+<label>Image file names, comma separated (first one is the big picture)</label><input id="imgs" placeholder="spawn1.png, spawn2.png, spawn3.png">
+<div style="margin-top:22px"><button class="go" id="mk">Generate</button><button class="go" id="cp" style="background:var(--card);color:var(--t)">Copy</button></div><pre id="out"></pre></main>
+<script src="data/maps.js"></script><script>
+map.innerHTML=MAPS.map(m=>`<option value="${m.id}">${m.mode} — ${m.name}</option>`).join('');
+mk.onclick=()=>{const g=id=>document.getElementById(id).value.trim(),sl=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+out.textContent=',\n  '+JSON.stringify({id:sl(g('map')+' '+g('title')),map:g('map'),side:g('side'),title:g('title'),point:g('point'),desc:g('desc'),author:g('author'),authorUrl:g('url'),images:g('imgs').split(',').map(s=>s.trim()).filter(Boolean)});};
+cp.onclick=()=>navigator.clipboard.writeText(out.textContent);mk.click();
+</script></body></html>
