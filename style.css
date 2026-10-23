@@ -120,3 +120,56 @@ html.theme-transition,html.theme-transition *{transition-property:color,backgrou
 
 .lineup-detail{max-width:1240px;margin:0 auto}.lineup-detail .back{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-top:1px solid var(--line);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase}.lineup-heading{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:8px 24px;margin:4px 0 20px}.lineup-heading .crumb{grid-column:1;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase}.lineup-heading h1{grid-column:1;grid-row:2;margin:0;font-size:clamp(1.3rem,2.3vw,1.8rem)}.lineup-credit{grid-column:1;grid-row:3;margin:0;font-size:.68rem;text-transform:uppercase}.lineup-heading .desc{grid-column:2;grid-row:1/4;justify-self:end;max-width:42ch;margin:0;font-size:.72rem;font-weight:500;text-align:right}.lineup-gallery{display:grid;grid-template-columns:minmax(0,900px) minmax(150px,260px);justify-content:center;align-items:start;gap:12px;max-width:1180px;margin:28px auto 70px}.lineup-gallery.single-image{grid-template-columns:minmax(0,960px)}.lineup-detail .viewer{display:flex;justify-content:center;align-items:center;min-width:0;min-height:120px}.lineup-detail .viewer img{display:block;width:auto;max-width:100%;height:auto;max-height:min(68vh,720px);object-fit:contain;margin:0 auto;border:1px solid var(--line)}.lineup-detail .thumbs{grid-template-columns:1fr;align-content:start;gap:12px;max-height:min(68vh,720px);overflow-y:auto;margin:0}.lineup-detail .thumbs button{overflow:hidden}.lineup-detail .thumbs img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
 @media(max-width:760px){.lineup-detail .back{flex-wrap:wrap}.lineup-heading{grid-template-columns:1fr;gap:6px}.lineup-heading .crumb,.lineup-heading h1,.lineup-credit,.lineup-heading .desc{grid-column:1;grid-row:auto;justify-self:start;text-align:left}.lineup-gallery,.lineup-gallery.single-image{grid-template-columns:minmax(0,1fr);gap:10px;margin:18px auto 48px}.lineup-detail .viewer img{max-height:62vh}.lineup-detail .thumbs{grid-template-columns:repeat(3,minmax(0,1fr));max-height:none;overflow:visible}}
+
+/* Shared tools and consistent interaction states across the archive. */
+button,input,select,textarea{font:inherit}
+button{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+input,select,textarea{border-radius:0;transition:border-color .2s ease,background-color .35s ease,color .35s ease}
+input::placeholder,textarea::placeholder{color:var(--dim);opacity:.75}
+input[type=checkbox]{accent-color:var(--teal)}
+input[type=file]{padding:8px;background:var(--panel);color:var(--t)}
+input[type=file]::file-selector-button{margin-right:12px;padding:8px 12px;border:1px solid var(--line);background:var(--card);color:var(--head);font:inherit;cursor:pointer}
+button,.btn,.go{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+button:hover,.btn:hover,.go:hover{transform:translateY(-1px)}
+.tool-page #top{position:relative;align-items:center}
+.tool-page .tool-back{justify-self:start;align-self:center;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--head)}
+.tool-main{width:100%;max-width:1000px;margin:0 auto;padding:36px 24px 72px}
+.tool-intro{max-width:760px;margin:0 auto 24px}
+.tool-intro .tag{margin-bottom:10px}
+.tool-intro h1{margin-bottom:10px}
+.tool-intro p{color:var(--dim)}
+.tool-page details{max-width:760px;margin:0 auto 14px;border:1px solid var(--line);background:var(--card);transition:border-color .2s ease,background-color .35s ease}
+.tool-page details[open]{box-shadow:0 5px 18px #64101a0a}
+.tool-page summary{position:relative;padding:15px 48px 15px 18px;color:var(--head);font-size:.76rem;letter-spacing:.04em;text-transform:uppercase;list-style:none}
+.tool-page summary::-webkit-details-marker{display:none}
+.tool-page summary:after{content:'+';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:1.15rem;color:var(--teal)}
+.tool-page details[open]>summary:after{content:'−'}
+.tool-page details>.card{margin:0;padding:18px;border:0;border-top:1px solid var(--line);background:transparent}
+.tool-page .setup-help{max-width:68ch;margin-bottom:18px;font-size:.78rem}
+.tool-page label{font-size:.72rem;letter-spacing:.025em}
+.tool-page input,.tool-page select,.tool-page textarea{min-height:44px;border-radius:0}
+.tool-page textarea{min-height:92px;resize:vertical}
+.tool-page .btn,.tool-page .go{min-height:42px;padding:10px 16px;border:1px solid var(--teal);background:var(--teal);color:#fff;font-size:.72rem;letter-spacing:.025em}
+.tool-page .btn:hover,.tool-page .go:hover{box-shadow:3px 3px 0 #a5223020}
+.tool-page .btn.g,.tool-page .go.secondary{background:var(--panel);color:var(--head);border-color:var(--line)}
+.tool-page .btn.r{background:var(--bad);border-color:var(--bad);color:#fff}
+.admin-page #msg{max-width:760px;margin:0 auto 14px;border-radius:0;font-size:.78rem}
+.admin-page .li{gap:16px;flex-wrap:wrap;padding:12px 14px;background:var(--panel);border-color:var(--line)}
+.admin-page .li>span:first-child{min-width:180px;overflow-wrap:anywhere;color:var(--head)}
+.admin-page .li>span:last-child{display:flex;gap:8px;align-items:center}
+.admin-page #work>details:nth-child(2) .card{padding:18px}
+.add-main>.card{max-width:760px;margin:0 auto;padding:20px;border-color:var(--line)}
+.add-main .two{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.add-main .builder-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.add-main pre{min-height:88px;max-height:340px;border-color:var(--line);font-size:.72rem;line-height:1.55}
+.admin-page .shrink-label{display:flex;align-items:center;gap:10px;margin:16px 0 4px}
+.admin-page .shrink-label input{width:auto;min-height:auto}
+.admin-page .li .btn{min-height:34px}
+:root[data-theme="dark"] .row.empty{color:var(--dim)}
+:root[data-theme="dark"] .tool-page details[open]{box-shadow:0 5px 22px #0005}
+:root[data-theme="dark"] .tool-page .btn:not(.g):not(.r),:root[data-theme="dark"] .tool-page .go:not(.secondary){color:#001}
+:root[data-theme="dark"] .tool-page .btn:hover,:root[data-theme="dark"] .tool-page .go:hover{box-shadow:3px 3px 0 #00c8bb22}
+:root[data-theme="dark"] .tool-page input[type=file]::file-selector-button{background:var(--card);color:var(--t)}
+:root[data-theme="dark"] .add-main pre{background:#080b10}
+@media(max-width:760px){.tool-main{padding:26px 14px 52px}.tool-page .tool-back{font-size:.65rem}.tool-page .theme-toggle{top:18px;right:18px}.tool-page .logo{padding-right:124px}.tool-page details>.card{padding:14px}.admin-page .li>span:last-child{width:100%}.add-main .two{grid-template-columns:1fr}.grid,.guide-grid{grid-template-columns:minmax(0,1fr)}.guide-links{grid-template-columns:minmax(0,1fr)}.foot-nav{gap:12px 18px}}

@@ -1,32 +1,34 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Admin · SP//DER</title>
-<link rel="stylesheet" href="style.css"><style>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('spider-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="style.css?v=tools-polish-1"><style>
 label{display:block;margin:14px 0 5px;color:var(--head);font-size:.9rem}input,select,textarea{width:100%;background:var(--card);color:var(--t);border:1px solid var(--line);padding:10px 12px;font:inherit}
 .btn{background:var(--teal);color:#001;border:0;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer;margin:16px 10px 0 0}.btn.g{background:var(--card);color:var(--t);border:1px solid var(--line)}.btn.r{background:var(--bad);color:#fff}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:640px){.two{grid-template-columns:1fr}}
 #msg{position:sticky;top:70px;z-index:15;padding:12px 16px;margin-bottom:18px;border:1px solid var(--line);background:var(--panel);display:none}#msg.ok{border-color:var(--good);display:block}#msg.err{border-color:var(--bad);display:block}#msg.wk{border-color:var(--teal);display:block}
 .li{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 14px;border:1px solid var(--line);background:var(--card);margin-bottom:6px}.li .btn{margin:0;padding:6px 12px;font-size:.8rem}
 details{margin-bottom:12px}summary{cursor:pointer;color:var(--head);padding:10px 0;font-size:1.05rem}
-</style></head><body>
-<header id="top"><a class="logo" href="index.html"><span>SP//DER©<small>ADMIN</small></span></a><a href="index.html">← back to site</a></header>
-<main><div id="msg"></div>
+</style></head><body class="tool-page admin-page">
+<header id="top"><a class="logo" href="index.html"><span>SP//DER©<small>DEFENSE CORP. / SITE EDITOR</small></span></a><a class="tool-back" href="index.html">← back to site</a><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">◐ Dark mode</button></header>
+<main class="tool-main"><div class="tool-intro"><span class="tag">//maintainer console</span><h1>Site editor</h1><p>Connect your repository to add and manage lineup screenshots and map data.</p></div><div id="msg" role="status" aria-live="polite"></div>
 <details id="setup" open><summary>1 · Connect to your GitHub repo</summary>
-<div class="card"><p class="dim" style="font-size:.9rem">Create a token at GitHub → Settings → Developer settings → Fine-grained tokens. Pick <b>only this repo</b> and give it <b>Contents: Read and write</b>. The token is saved only in this browser.</p>
-<div class="two"><div><label>GitHub username</label><input id="owner"></div><div><label>Repo name</label><input id="repo"></div><div><label>Branch</label><input id="branch" value="main"></div><div><label>Token</label><input id="token" type="password" autocomplete="off"></div></div>
+<div class="card setup-card"><p class="dim setup-help">Create a fine-grained token in GitHub settings. Select only this repository and grant <b>Contents: Read and write</b>. The token is stored only in this browser.</p>
+<div class="two"><div><label for="owner">GitHub username</label><input id="owner" autocomplete="username"></div><div><label for="repo">Repository name</label><input id="repo"></div><div><label for="branch">Branch</label><input id="branch" value="main"></div><div><label for="token">Fine-grained token</label><input id="token" type="password" autocomplete="off"></div></div>
 <button class="btn" id="save">Save &amp; load data</button><button class="btn g" id="forget">Forget token</button></div></details>
 <div id="work" hidden>
 <details open><summary id="fh">2 · Add a lineup</summary><div class="card">
-<div class="two"><div><label>Map</label><select id="map"></select></div><div><label>Side</label><select id="side"><option value="">none</option><option>Attack</option><option>Defense</option></select></div>
-<div><label>Title</label><input id="title" placeholder="Spawn door to point"></div><div><label>Point</label><input id="point" placeholder="Point 1"></div></div>
-<label>Description</label><textarea id="desc" rows="2"></textarea>
-<div class="two"><div><label>Author</label><input id="author"></div><div><label>Author link (optional)</label><input id="url"></div></div>
-<label>Screenshots (first = big picture; pick up to 3+)</label><input id="files" type="file" accept="image/*" multiple>
-<label style="display:flex;gap:10px;align-items:center"><input id="shrink" type="checkbox" checked style="width:auto"> Shrink to max 1920px (keeps the repo small)</label>
+<div class="two"><div><label for="map">Map</label><select id="map"></select></div><div><label for="side">Side</label><select id="side"><option value="">none</option><option>Attack</option><option>Defense</option></select></div>
+<div><label for="title">Title</label><input id="title" placeholder="Spawn door to point"></div><div><label for="point">Point</label><input id="point" placeholder="Point 1"></div></div>
+<label for="desc">Description</label><textarea id="desc" rows="2"></textarea>
+<div class="two"><div><label for="author">Author</label><input id="author"></div><div><label for="url">Author link (optional)</label><input id="url"></div></div>
+<label for="files">Screenshots (first is the main picture; add up to 3 or more)</label><input id="files" type="file" accept="image/*" multiple>
+<label class="shrink-label"><input id="shrink" type="checkbox" checked> Shrink images to max 1920px to keep the repo small</label>
 <button class="btn" id="pub">Publish lineup</button><button class="btn g" id="cancel" hidden>Cancel edit</button></div></details>
 <details><summary>3 · Manage lineups</summary><div id="list"></div></details>
-<details><summary>4 · Add a map</summary><div class="card"><div class="two"><div><label>Name</label><input id="mn"></div><div><label>Location</label><input id="ml"></div>
-<div><label>Mode</label><select id="mm"><option>Convergence</option><option>Convoy</option><option>Domination</option></select></div><div><label>Added (e.g. Nov 2026)</label><input id="ma"></div></div>
-<label>Notes</label><textarea id="mt" rows="2"></textarea><button class="btn" id="addmap">Add map</button></div></details>
+<details><summary>4 · Add a map</summary><div class="card"><div class="two"><div><label for="mn">Name</label><input id="mn"></div><div><label for="ml">Location</label><input id="ml"></div>
+<div><label for="mm">Mode</label><select id="mm"><option>Convergence</option><option>Convoy</option><option>Domination</option></select></div><div><label for="ma">Added (e.g. Nov 2026)</label><input id="ma"></div></div>
+<label for="mt">Notes</label><textarea id="mt" rows="2"></textarea><button class="btn" id="addmap">Add map</button></div></details>
 </div></main>
+<script src="theme.js?v=tools-polish-1"></script>
 <script>
 const $=id=>document.getElementById(id),slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -40,8 +42,8 @@ const getFile=async p=>dec((await gh('/contents/'+p+'?ref='+encodeURIComponent(c
 const parse=(t,n)=>new Function(t+';return '+n)();
 const ser=(t,n,a)=>t.slice(0,t.indexOf('const '+n))+'const '+n+' = [\n'+a.map(x=>'  '+JSON.stringify(x)).join(',\n')+'\n];\n';
 const b64=blob=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result.split(',')[1]);f.readAsDataURL(blob)});
-async function commit(files,message){const c=cfg(),ref=await gh('/git/ref/heads/'+encodeURIComponent(c.branch)),base=ref.object.sha,bc=await gh('/git/commits/'+base),tree=[];
- for(const f of files){const b=await gh('/git/blobs',{method:'POST',body:JSON.stringify({content:f.content,encoding:f.b64?'base64':'utf-8'})});tree.push({path:f.path,mode:'100644',type:'blob',sha:b.sha})}
+async function commit(files,message){const c=cfg(),ref=await gh('/git/ref/heads/'+encodeURIComponent(c.branch)),base=ref.object.sha,bc=await gh('/git/commits/'+base),tree=[],existing=files.some(f=>f.delete)?new Set((await gh('/git/trees/'+bc.tree.sha+'?recursive=1')).tree.map(x=>x.path)):null;
+ for(const f of files){if(f.delete){if(existing.has(f.path))tree.push({path:f.path,mode:'100644',type:'blob',sha:null});continue}const b=await gh('/git/blobs',{method:'POST',body:JSON.stringify({content:f.content,encoding:f.b64?'base64':'utf-8'})});tree.push({path:f.path,mode:'100644',type:'blob',sha:b.sha})}
  const t=await gh('/git/trees',{method:'POST',body:JSON.stringify({base_tree:bc.tree.sha,tree})}),n=await gh('/git/commits',{method:'POST',body:JSON.stringify({message,tree:t.sha,parents:[base]})});
  await gh('/git/refs/heads/'+encodeURIComponent(c.branch),{method:'PATCH',body:JSON.stringify({sha:n.sha})})}
 async function prep(file,base,shrink){
@@ -63,7 +65,7 @@ $('pub').onclick=async()=>{try{const title=$('title').value.trim(),map=$('map').
  const L=old?st.L.map(x=>x.id===id?e:x):[...st.L,e];out.push({path:'data/lineups.js',content:ser(st.lt,'LINEUPS',L)});
  await commit(out,(old?'Edit':'Add')+' lineup: '+title);st.L=L;st.lt=out[out.length-1].content;render();reset();msg('Published! The site updates in about a minute.','ok')}catch(e){msg(e.message,'err')}};
 $('list').onclick=async e=>{const d=e.target.dataset;if(d.e){const x=st.L.find(y=>y.id===d.e);st.edit=x.id;$('map').value=x.map;$('side').value=x.side;$('title').value=x.title;$('point').value=x.point;$('desc').value=x.desc;$('author').value=x.author;$('url').value=x.authorUrl;$('fh').textContent='Editing: '+x.title+' (pick new screenshots only to replace the old ones)';$('pub').textContent='Save changes';$('cancel').hidden=false;$('fh').scrollIntoView()}
- if(d.d&&confirm('Delete this lineup? (its images stay in the repo)')){try{msg('Deleting…','wk');const L=st.L.filter(x=>x.id!==d.d),t=ser(st.lt,'LINEUPS',L);await commit([{path:'data/lineups.js',content:t}],'Delete lineup '+d.d);st.L=L;st.lt=t;render();msg('Deleted.','ok')}catch(er){msg(er.message,'err')}}};
+ if(d.d){const removed=st.L.find(x=>x.id===d.d);if(!removed)return;const L=st.L.filter(x=>x.id!==d.d),allImages=Array.isArray(removed.images)?removed.images:[],images=[...new Set(allImages)].filter(name=>typeof name==='string'&&/^[\w.-]+$/.test(name)&&name!=='.'&&name!=='..'&&!L.some(x=>Array.isArray(x.images)&&x.images.includes(name)));const imageNote=images.length?` Its ${images.length} screenshot${images.length===1?'':'s'} not used by another lineup will also be removed from the repo.`:allImages.length?' Its screenshots are still used by another lineup, so they will stay in the repo.':'';if(!confirm(`Delete “${removed.title}”?${imageNote} This change will be saved as a GitHub commit.`))return;try{msg('Deleting lineup and unused screenshots…','wk');const t=ser(st.lt,'LINEUPS',L),files=[{path:'data/lineups.js',content:t},...images.map(name=>({path:'images/'+name,delete:true}))];await commit(files,'Delete lineup '+d.d);st.L=L;st.lt=t;if(st.edit===d.d)reset();render();msg(`Deleted lineup${images.length?` and ${images.length} unused screenshot${images.length===1?'':'s'}`:''}.`,'ok')}catch(er){msg(er.message,'err')}}};
 $('addmap').onclick=async()=>{try{const name=$('mn').value.trim();if(!name)return msg('Map needs a name.','err');let id=slug(name);if(st.M.some(m=>m.id===id))return msg('That map already exists.','err');
  const M=[...st.M,{id,name,location:$('ml').value.trim(),mode:$('mm').value,added:$('ma').value.trim()||'—',peni:null,note:$('mt').value.trim()||'No notes yet.',isNew:true}],t=ser(st.mt,'MAPS',M);msg('Adding…','wk');
  await commit([{path:'data/maps.js',content:t}],'Add map: '+name);st.M=M;st.mt=t;$('map').innerHTML=M.map(m=>`<option value="${esc(m.id)}">${esc(m.mode)} — ${esc(m.name)}</option>`).join('');['mn','ml','ma','mt'].forEach(i=>$(i).value='');msg('Map added.','ok')}catch(e){msg(e.message,'err')}};
