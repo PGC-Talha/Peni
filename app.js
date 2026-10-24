@@ -2,7 +2,7 @@
 DATA.maps=MAPS;
 const $=s=>document.querySelector(s), app=$('#app');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const PAGES=[['','Startup'],['lineups','Lineups'],['guides','Guides'],['maps','Map Database'],['system','System Info']];
+const PAGES=[['','Startup'],['lineups','Lineups'],['guides','Guides'],['maps','Map Database'],['system','System Info'],['credits','Credits']];
 const MODES=['Convergence','Domination','Convoy'];
 const img=(f,c)=>`<img ${c||''} loading="lazy" src="images/${esc(f)}" alt="">`;
 $('#m-user').textContent=DATA.meta.loggedInAs;$('#m-upd').textContent=DATA.meta.lastUpdate;
@@ -70,6 +70,14 @@ function systemInfo(){
   <section><span class="tag">//maintainer console</span><h2>Contribute & maintain</h2><p>Use the site editor to add and manage maps, lineups, and screenshots. Changes are published through the site repository.</p><div class="guide-links"><a class="row" href="admin.html"><span>Open site editor<small>Manage maps, lineups, and screenshots</small></span><span class="go">open editor →</span></a></div></section>
   <section id="system-patches"><span class="tag">//system changelog</span><h2>Patch Log</h2>${patchRows()}</section>`;
 }
+function credits(){
+  return `<span class="tag">//archive contributors</span><h1>Credits</h1><p>This resource archive is maintained by PGC-Talha. Find me around the web:</p>
+  <div class="grid credits-grid">
+    <article class="card"><span class="tag">//code & projects</span><h3>GitHub</h3><p>Source code and project updates.</p><a href="https://github.com/PGC-Talha" target="_blank" rel="noopener noreferrer">github.com/PGC-Talha ↗</a></article>
+    <article class="card"><span class="tag">//live</span><h3>Twitch</h3><p>Catch me live on stream.</p><a href="https://twitch.tv/pgctalha" target="_blank" rel="noopener noreferrer">twitch.tv/pgctalha ↗</a></article>
+    <article class="card"><span class="tag">//community</span><h3>Discord</h3><p>Discord username</p><b class="credits-handle">pgc.</b></article>
+  </div>`;
+}
 const nf=()=>`<h1>Not found</h1><p><a href="#/lineups">← Back to lineups</a></p>`;
 let mapFilter='';
 function route(){
@@ -77,7 +85,7 @@ function route(){
   const page=a||'';let h;
   if(page==='lineups')h=c?lineupPage(b,c):b?mapPage(b):lineupsIndex();
   else if(page==='maps')h=mapsPage(mapFilter);else if(page==='guides'||page==='abilities'||page==='teamcomps')h=guides();
-  else if(page==='system'||page==='patches')h=systemInfo();else if(page==='')h=startup();else h=nf();
+  else if(page==='system'||page==='patches')h=systemInfo();else if(page==='credits')h=credits();else if(page==='')h=startup();else h=nf();
   app.innerHTML=h;window.scrollTo(0,0);
   const navPage=page==='abilities'||page==='teamcomps'?'guides':page==='patches'?'system':page;
   const cur=PAGES.find(p=>p[0]===navPage)||PAGES[0];$('#dir-cur').textContent=cur[1];
