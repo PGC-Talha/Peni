@@ -1,6 +1,6 @@
 // ============================================================
-//  LINEUPS  -  add yours at the BOTTOM of the list below.
-//  Easiest way: open add.html in your browser, fill the form, paste the result here.
+//  LINEUPS - Add and manage entries with admin.html on the live site.
+//  The editor uploads screenshots and commits the lineup data to GitHub.
 //
 //  id        unique, lowercase-with-dashes
 //  map       must match an "id" in data/maps.js (e.g. "krakoa")
@@ -35,3 +35,4 @@ const LINEUPS = [
   {"id": "yggdrasil-path-defense-spawn-wall", "map": "yggdrasil-path", "side": "Defense", "title": "Defense Spawn Wall", "point": "Point 1", "desc": "From first health pack on left of spawn. Lands on wall in front of spawn.", "author": "show-me-your-memes", "authorUrl": "https://www.reddit.com/user/show-me-your-memes/", "images": ["SlIWRLjWyUSCq5NZEkhgzUXUvnY.png", "UrVGBkZpRmcgCJ9Clhlvz78dPo.png", "dZgbAG2ePbt3f6nN5drDM0ZQ7c4.png"]},
   {"id": "yggdrasil-path-defense-spawn-comp-only", "map": "yggdrasil-path", "side": "Defense", "title": "Defense Spawn (Comp Only)", "point": "Point 1", "desc": "From first health pack on left of spawn. Lands near spawn door.", "author": "show-me-your-memes", "authorUrl": "https://www.reddit.com/user/show-me-your-memes/", "images": ["0jBMJDzeZNrCC7E2plJ2MBzbU.png", "oPCo7QiZvBivpk5XjXwwFPwYfY.png", "5lcZjDuIemd5KQ1MAOySUWzJyGk.png"]}
 ];
+

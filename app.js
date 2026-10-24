@@ -34,7 +34,7 @@ const lrow=l=>`<a class="row" href="#/lineups/${l.map}/${l.id}"><span>${esc(l.ti
 function mapPage(id){
   const m=mapById(id);if(!m)return nf();const l=lusOf(id),sided=l.some(x=>x.side);
   let h=back('#/lineups')+`<span class="tag">${esc(m.location)}</span><h1>${esc(m.name)}</h1><span class="badge b-${m.mode}">${m.mode}</span><div style="height:28px"></div>`;
-  if(!l.length)return h+`<div class="slot">No lineups yet. Add some in data/lineups.js (see add.html).</div>`;
+  if(!l.length)return h+`<div class="slot">No lineups yet. Add one using the site editor.</div>`;
   if(sided)h+=`<div class="cols">`+['Attack','Defense'].map(s=>`<div><h3>${s}</h3>${l.filter(x=>x.side===s).map(lrow).join('')||'<div class="slot">no lineups yet</div>'}</div>`).join('')+(l.some(x=>!x.side)?'':'')+`</div>`;
   else h+=`<div class="cols one"><div>${l.map(lrow).join('')}</div></div>`;
   const rest=sided?l.filter(x=>!x.side):[];if(rest.length)h+=`<h3 style="margin:28px 0 14px">Other</h3>`+rest.map(lrow).join('');
@@ -61,13 +61,13 @@ function guides(){
   <div class="guide-links"><a class="row" href="#/lineups"><span>Field lineups<small>Browse ${LINEUPS.length} community setup screenshots</small></span><span class="go">open →</span></a><a class="row" href="#/maps"><span>Map database<small>Map-by-map notes for the current pool</small></span><span class="go">open →</span></a></div>
   <section id="guide-abilities"><span class="tag">//operator kit</span><h2>Abilities & Tactics</h2><div class="guide-grid">${DATA.abilities.map(a=>`<article class="card guide-card"><div class="guide-card-head"><span class="key">${esc(a.key)}</span><b>${esc(a.name)}</b>${a.changed?` <span class="badge b-${a.changeType||''}">${a.changeType==='buff'?'Buffed':a.changeType==='nerf'?'Nerfed':'Updated'}</span>`:''}</div><p>${esc(a.desc)}</p>${a.changed?`<p class="dim guide-update">${esc(a.changed)}</p>`:''}</article>`).join('')}</div></section>
   <section id="guide-teamups"><span class="tag">//squad coordination</span><h2>Team-Ups & Matchups</h2><div class="grid">${DATA.teamComps.map(c=>`<article class="card"><span class="tag">${esc(c.type)}</span><h3>${esc(c.name)}</h3><div class="dim">⬡ ${c.partners.map(esc).join(' + ')}</div><p class="guide-synergy">${esc(c.synergy)}</p><ul class="tips">${c.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></article>`).join('')}</div></section>
-  <section id="guide-contribute"><span class="tag">//community intel</span><h2>Contribute a resource</h2><p>Share a lineup screenshot with the community or use the editor to submit a new map, lineup, or tactical note.</p><div class="guide-links"><a class="row" href="add.html"><span>Prepare a lineup<small>Build a lineup entry from your screenshots</small></span><span class="go">open tool →</span></a><a class="row" href="admin.html"><span>Open site editor<small>Add or manage entries with repository access</small></span><span class="go">open editor →</span></a></div></section>`;
+  <section id="guide-contribute"><span class="tag">//community intel</span><h2>Contribute a resource</h2><p>Use the site editor to add a new map or lineup. Access requires an authorized GitHub token.</p><div class="guide-links"><a class="row" href="admin.html"><span>Open site editor<small>Add or manage maps, lineups, and screenshots</small></span><span class="go">open editor →</span></a></div></section>`;
 }
 function systemInfo(){
   const h=DATA.hero;
   return `<span class="tag">//sys.msg</span><h1>System Admin Details</h1><p>This archive tracks current Peni Parker resources and balance notes. Content reflects Season ${esc(DATA.meta.season)} and was last updated ${esc(DATA.meta.lastUpdate)}.</p>
   <section class="system-overview"><span class="tag">//live database</span><h2>System Status</h2><div class="grid"><div class="card system-stat"><span class="tag">operator</span><b>${esc(h.name)}</b><p>${esc(h.role)} · ${esc(h.health)} HP · ${esc(h.tier)}-Tier</p></div><div class="card system-stat"><span class="tag">lineup archive</span><b>${LINEUPS.length}</b><p>Community lineup entries across ${MAPS.length} maps.</p></div><div class="card system-stat"><span class="tag">current build</span><b>Season ${esc(DATA.meta.season)}</b><p>${esc(DATA.meta.seasonName)} · updated ${esc(DATA.meta.lastUpdate)}</p></div></div></section>
-  <section><span class="tag">//maintainer console</span><h2>Contribute & maintain</h2><p>Use the lineup builder for manual submissions or the admin editor to add and manage repository data. Changes are published through the site repository.</p><div class="guide-links"><a class="row" href="add.html"><span>Prepare a lineup<small>Generate a new entry for the archive</small></span><span class="go">open tool →</span></a><a class="row" href="admin.html"><span>Open site editor<small>Manage maps, lineups, and screenshots</small></span><span class="go">open editor →</span></a></div></section>
+  <section><span class="tag">//maintainer console</span><h2>Contribute & maintain</h2><p>Use the site editor to add and manage maps, lineups, and screenshots. Changes are published through the site repository.</p><div class="guide-links"><a class="row" href="admin.html"><span>Open site editor<small>Manage maps, lineups, and screenshots</small></span><span class="go">open editor →</span></a></div></section>
   <section id="system-patches"><span class="tag">//system changelog</span><h2>Patch Log</h2>${patchRows()}</section>`;
 }
 const nf=()=>`<h1>Not found</h1><p><a href="#/lineups">← Back to lineups</a></p>`;
@@ -91,3 +91,4 @@ app.addEventListener('click',e=>{
 });
 addEventListener('hashchange',route);route();
 })();
+
