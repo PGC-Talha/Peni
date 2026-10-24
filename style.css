@@ -173,3 +173,6 @@ button:hover,.btn:hover,.go:hover{transform:translateY(-1px)}
 :root[data-theme="dark"] .tool-page input[type=file]::file-selector-button{background:var(--card);color:var(--t)}
 :root[data-theme="dark"] .add-main pre{background:#080b10}
 @media(max-width:760px){.tool-main{padding:26px 14px 52px}.tool-page .tool-back{font-size:.65rem}.tool-page .theme-toggle{top:18px;right:18px}.tool-page .logo{padding-right:124px}.tool-page details>.card{padding:14px}.admin-page .li>span:last-child{width:100%}.add-main .two{grid-template-columns:1fr}.grid,.guide-grid{grid-template-columns:minmax(0,1fr)}.guide-links{grid-template-columns:minmax(0,1fr)}.foot-nav{gap:12px 18px}}
+
+#loc{position:absolute;left:50%;top:18px;transform:translateX(-50%);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:center}
+@media(max-width:640px){#loc{top:15px;font-size:.58rem}}
