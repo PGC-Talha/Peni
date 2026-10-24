@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Admin · SP//DER</title>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('spider-theme')||'light'}catch(e){document.documentElement.dataset.theme='light'}</script>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('spider-theme-choice')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
 <link rel="stylesheet" href="style.css?v=tools-polish-1"><style>
 label{display:block;margin:14px 0 5px;color:var(--head);font-size:.9rem}input,select,textarea{width:100%;background:var(--card);color:var(--t);border:1px solid var(--line);padding:10px 12px;font:inherit}
 .btn{background:var(--teal);color:#001;border:0;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer;margin:16px 10px 0 0}.btn.g{background:var(--card);color:var(--t);border:1px solid var(--line)}.btn.r{background:var(--bad);color:#fff}
@@ -28,7 +28,7 @@ details{margin-bottom:12px}summary{cursor:pointer;color:var(--head);padding:10px
 <div><label for="mm">Mode</label><select id="mm"><option>Convergence</option><option>Convoy</option><option>Domination</option></select></div><div><label for="ma">Added (e.g. Nov 2026)</label><input id="ma"></div></div>
 <label for="mt">Notes</label><textarea id="mt" rows="2"></textarea><button class="btn" id="addmap">Add map</button></div></details>
 </div></main>
-<script src="theme.js?v=tools-polish-1"></script>
+<script src="theme.js?v=dark-default-1"></script>
 <script>
 const $=id=>document.getElementById(id),slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
