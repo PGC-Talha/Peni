@@ -6,7 +6,23 @@ const PAGES=[['','Startup'],['lineups','Lineups'],['guides','Guides'],['maps','M
 const MODES=['Convergence','Domination','Convoy'];
 const img=(f,c)=>`<img ${c||''} loading="lazy" src="images/${esc(f)}" alt="">`;
 $('#m-user').textContent=DATA.meta.loggedInAs;$('#m-upd').textContent=DATA.meta.lastUpdate;
-try{$('#loc').textContent=Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_',' ')}catch(e){}
+const connection=$('#loc');
+if(connection){
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),7000);
+  fetch('https://ipwho.is/?fields=success,ip,city,country',{
+    method:'GET',mode:'cors',cache:'no-store',credentials:'omit',
+    referrerPolicy:'no-referrer',signal:controller.signal
+  })
+    .then(response=>{if(!response.ok)throw new Error('Lookup unavailable');return response.json()})
+    .then(info=>{
+      if(info.success!==true||typeof info.ip!=='string')throw new Error('Lookup unavailable');
+      const place=[info.city,info.country].filter((value,index,array)=>typeof value==='string'&&value.trim()&&array.indexOf(value)===index).join(', ');
+      connection.textContent='ACCESSING FROM: '+info.ip+(place?', '+place:'');
+    })
+    .catch(()=>{connection.textContent='ACCESSING FROM: location unavailable'})
+    .finally(()=>clearTimeout(timeout));
+}
 $('#dir-menu').innerHTML=PAGES.map(p=>`<a href="#/${p[0]}" data-p="${p[0]}">${p[1]}</a>`).join('');
 $('#dir-btn').onclick=e=>{e.stopPropagation();const m=$('#dir-menu');m.hidden=!m.hidden};
 document.addEventListener('click',()=>$('#dir-menu').hidden=true);
